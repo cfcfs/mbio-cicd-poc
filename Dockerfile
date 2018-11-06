@@ -23,6 +23,7 @@ RUN curl -L "https://packages.cloudfoundry.org/stable?release=linux64-binary&sou
         mkdir -p ${DEFAULT_MAVEN_CONFIG}
 
 VOLUME /var/run/docker.sock
+VOLUME /usr/share/maven/repository
 
 COPY settings.xml ${DEFAULT_MAVEN_CONFIG}/
 
