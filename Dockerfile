@@ -2,6 +2,7 @@ FROM openjdk:8-jdk-alpine
 
 ARG MAVEN_VERSION=3.5.4-r1
 ARG CF_CLI_VERSION=6.40.0
+ARG DOCKER_VERSION=18.06.1-r0
 ARG DEFAULT_MAVEN_CONFIG=/usr/share/maven/
 
 ENV MAVEN_CONFIG=$DEFAULT_MAVEN_CONFIG
@@ -14,11 +15,14 @@ RUN apk --update add --no-cache \
       openssh-client rsync \
       libxml2-utils \
       jq \
-      maven=${MAVEN_VERSION} 
+      maven=${MAVEN_VERSION} \
+      docker=${DOCKER_VERSION}
 
 RUN curl -L "https://packages.cloudfoundry.org/stable?release=linux64-binary&source=github&version=${CF_CLI_VERSION}" | tar -zx && \
         mv cf /usr/local/bin && \
         mkdir -p ${DEFAULT_MAVEN_CONFIG}
+
+VOLUME /var/run/docker.sock
 
 COPY settings.xml ${DEFAULT_MAVEN_CONFIG}/
 

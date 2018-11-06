@@ -11,6 +11,9 @@ podTemplate(label: 'mbio-cicd-poc',
       command: 'cat',
       ttyEnabled: true
     ),
+  ],
+  volumes: [
+    hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock'),
   ]
 )
 {
