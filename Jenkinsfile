@@ -7,7 +7,7 @@ podTemplate(label: 'mbio-cicd-poc',
     ),
     containerTemplate(
       name: 'build',
-      image: 'mbcicdpoc/build',
+      image: 'mbcicdpoc/build:0.2',
       command: 'cat',
       ttyEnabled: true
     ),
@@ -23,7 +23,9 @@ podTemplate(label: 'mbio-cicd-poc',
         container('build') {
             echo 'building image...'
             sh """
-            mvn --version
+            git clone https://github.com/cfcfs/spring-petclinic 
+            cd spring-petclinic 
+            mvn clean install 
             """
         }
     }
@@ -31,6 +33,9 @@ podTemplate(label: 'mbio-cicd-poc',
     stage('Push Docker HUB') {
         container('build') {
             echo 'push docker image to docker hub...'
+            sh """
+            docker version
+            """
         }
     }
 
