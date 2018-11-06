@@ -16,23 +16,20 @@ podTemplate(label: 'mbio-cicd-poc',
 {
   node ('mbio-cicd-poc') {
 
-    agent any
-    
-    stages {
-        stage('Build') {
-            container('build') {
-                echo 'building image...'
-                sh """
-                mvn --version
-                """
-            }
-        }
-
-        stage('Push Docker HUB') {
-            container('build') {
-                echo 'push docker image to docker hub...'
-            }
+    stage('Build') {
+        container('build') {
+            echo 'building image...'
+            sh """
+            mvn --version
+            """
         }
     }
+
+    stage('Push Docker HUB') {
+        container('build') {
+            echo 'push docker image to docker hub...'
+        }
+    }
+
   }
 }
