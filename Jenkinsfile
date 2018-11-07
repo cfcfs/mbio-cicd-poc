@@ -7,7 +7,7 @@ podTemplate(label: 'mbio-cicd-poc',
     ),
     containerTemplate(
       name: 'build',
-      image: 'mbcicdpoc/build:0.2',
+      image: 'mbcicdpoc/build:0.3',
       command: 'cat',
       ttyEnabled: true
     ),
@@ -22,12 +22,16 @@ podTemplate(label: 'mbio-cicd-poc',
 
     stage('Build') {
         container('build') {
-            echo 'building image...'
-            sh """
-            git clone https://github.com/cfcfs/spring-petclinic 
-            cd spring-petclinic 
-            mvn -B -s /usr/share/maven/settings.xml clean install dockerfile:build
-            """
+            docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+                echo 'building image...'
+                sh """
+                git clone https://github.com/cfcfs/spring-petclinic
+                cd spring-petclinic
+                mvn -B clean install -DskipTests
+                #mvn -B dockerfile:push
+                #docker push cortelos/petclinic:latest
+                """
+            }
         }
     }
 
@@ -42,4 +46,3 @@ podTemplate(label: 'mbio-cicd-poc',
 
   }
 }
-
