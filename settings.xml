@@ -7,7 +7,7 @@
       <repositories>
         <repository>
           <id>maven-public</id>
-          <url>https://nexus-service.nexus.svc.kubernetes.local/repository/maven-public/</url>
+          <url>http://nexus.svc.cluster.local:8081/repository/maven-public</url>
           <releases>
             <enabled>true</enabled>
           </releases>
@@ -17,7 +17,7 @@
         </repository>
         <repository>
           <id>public-snapshots</id>
-          <url>https://nexus.svc.cluster.local/repository/public-snapshots/</url>
+          <url>http://nexus.svc.cluster.local:8081/repository/maven-snapshots/</url>
           <releases>
             <enabled>false</enabled>
           </releases>
@@ -27,7 +27,7 @@
         </repository>
         <repository>
           <id>public-releases</id>
-          <url>https://nexus.svc.cluster.local/repository/public-releases/</url>
+          <url>http://nexus.svc.cluster.local:8081/repository/maven-releases/</url>
           <releases>
             <enabled>true</enabled>
           </releases>
@@ -51,8 +51,13 @@
   <servers>
     <server>
       <id>public-releases</id>
-      <username>admin</username>
-      <password>admin123</password>
+      <username>mbio</username>
+      <password>mbio</password>
+    </server>
+    <server>
+      <id>public-snapshots</id>
+      <username>mbio</username>
+      <password>mbio</password>
     </server>
   </servers>
 </settings>
