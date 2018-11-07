@@ -17,7 +17,7 @@
         </repository>
         <repository>
           <id>public-snapshots</id>
-          <url>https://nexus-service.nexus.svc.kubernetes.local/repository/public-snapshots/</url>
+          <url>https://nexus.svc.cluster.local/repository/public-snapshots/</url>
           <releases>
             <enabled>false</enabled>
           </releases>
@@ -27,7 +27,7 @@
         </repository>
         <repository>
           <id>public-releases</id>
-          <url>https://nexus-service.nexus.svc.kubernetes.local/repository/public-releases/</url>
+          <url>https://nexus.svc.cluster.local/repository/public-releases/</url>
           <releases>
             <enabled>true</enabled>
           </releases>
