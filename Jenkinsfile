@@ -28,7 +28,7 @@ podTemplate(label: 'mbio-cicd-poc',
                 git clone https://github.com/cfcfs/spring-petclinic
 
                 cd spring-petclinic
-                mvn -B clean install -DskipTests
+                mvn -B clean install 
 
                 mvn -B deploy -DskipTests
 
