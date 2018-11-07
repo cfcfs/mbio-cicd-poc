@@ -14,6 +14,7 @@ podTemplate(label: 'mbio-cicd-poc',
   ],
   volumes: [
     hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock'),
+    persistentVolumeClaim(mountPath: '/usr/share/maven/repository', claimName: 'claim-jenkins-nodes-shared-persisted-volume', readOnly: false)
   ]
 )
 {
@@ -25,7 +26,7 @@ podTemplate(label: 'mbio-cicd-poc',
             sh """
             git clone https://github.com/cfcfs/spring-petclinic 
             cd spring-petclinic 
-            mvn clean install 
+            mvn -B -s /usr/share/maven/settings.xml clean install dockerfile:build
             """
         }
     }
@@ -41,3 +42,4 @@ podTemplate(label: 'mbio-cicd-poc',
 
   }
 }
+
