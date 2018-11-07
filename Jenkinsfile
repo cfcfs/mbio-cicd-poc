@@ -22,14 +22,14 @@ podTemplate(label: 'mbio-cicd-poc',
 
     stage('Build') {
         container('build') {
-            docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+            docker.withRegistry('', 'dockerhub') {
                 echo 'building image...'
                 sh """
                 git clone https://github.com/cfcfs/spring-petclinic
                 cd spring-petclinic
                 mvn -B clean install -DskipTests
                 #mvn -B dockerfile:push
-                #docker push cortelos/petclinic:latest
+                docker push cortelos/petclinic:latest
                 """
             }
         }
