@@ -7,7 +7,7 @@ podTemplate(label: 'mbio-cicd-poc',
     ),
     containerTemplate(
       name: 'build',
-      image: 'mbcicdpoc/build:0.3',
+      image: 'mbcicdpoc/build:0.8',
       command: 'cat',
       ttyEnabled: true
     ),
