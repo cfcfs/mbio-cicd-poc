@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    label: mbio-cicd-poc
+spec:
+  containers:
+    - name: jnlp
+      image: jenkinsci/jnlp-slave:3.10-1-alpine
+      args: ['\$(JENKINS_SECRET)', '\$(JENKINS_NAME)']
+    - name: build
+      image: mbcicdpoc/build:0.8
+      command:
+        - cat
+      tty: true
+      volumeMounts:
+        - name: docker
+          mountPath: /var/run/docker.sock
+        - name: maven-repo
+          mountPath: /usr/share/maven/repository
+  volumes:
+    - name: docker
+      hostPath:
+        path: /var/run/docker.sock
+    - name: maven-repo
+      persistentVolumeClaim:
+        claimName: claim-jenkins-nodes-shared-persisted-volume
+        readOnly: false
+
