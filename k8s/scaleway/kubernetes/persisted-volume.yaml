@@ -1,0 +1,15 @@
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: hostpath-volume
+  labels:
+    type: local
+spec:
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  reclaimPolicy:
+    - Recycle
+  hostPath:
+    path: "/tmp/kube-hostdata"
